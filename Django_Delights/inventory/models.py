@@ -1,3 +1,4 @@
+from pickle import TRUE
 from tkinter import CASCADE
 from django.db import models
 import datetime
@@ -16,7 +17,7 @@ class Ingredient(models.Model):
     def __str__(self):
         return "There are " + str(self.quantity) + " " + self.unit + "s of " +self.name + " available. They cost " + str(self.price_per_unit) + " per " + self.unit
 class RecipeRequirements(models.Model):
-    ingredients = models.ManyToManyField(Ingredient)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, blank=TRUE, null=TRUE)
     menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     quantity_needed = models.FloatField(default=0.0)
     
