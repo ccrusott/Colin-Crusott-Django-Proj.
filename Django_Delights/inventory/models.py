@@ -4,9 +4,11 @@ from django.db import models
 import datetime
 # Create your models here.
 class MenuItem(models.Model):
-    menu_item_name = models.CharField(max_length=30)
+    menu_item_name = models.CharField(unique=True, max_length=30)
     item_price = models.FloatField(max_length=5)
-
+    def get_absolute_url(self):
+        return '/inventory/menu/list'
+    
     def __str__(self):
         return self.menu_item_name + " costs " + str(self.item_price)
 class Ingredient(models.Model):
