@@ -35,8 +35,8 @@ class IngredientCreate(CreateView):
     fields = ['name', 'quantity', 'price_per_unit', 'unit']
 class IngredientDelete(DeleteView):
     model = Ingredient
-    template = "inventory/ingredient_delete.html"
-    success_url = "inventory/ingredient/list"
+    template = "inventory/ingredient_confirm_delete.html"
+    success_url = "/inventory/ingredient/list"
 class IngredientUpdate(UpdateView):
     model = Ingredient
     template = "inventory/ingredient_update.html"

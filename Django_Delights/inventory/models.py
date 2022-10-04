@@ -16,6 +16,8 @@ class Ingredient(models.Model):
     quantity = models.IntegerField(default=0)
     price_per_unit = models.FloatField(default=0.0)
     unit = models.CharField(max_length=30, default="Units")
+    def get_absolute_url(self):
+        return '/inventory/ingredient/list'
     def __str__(self):
         return "There are " + str(self.quantity) + " " + self.unit + "s of " +self.name + " available. They cost " + str(self.price_per_unit) + " per " + self.unit
 class RecipeRequirements(models.Model):
