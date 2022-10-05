@@ -1,0 +1,27 @@
+{% extends "./base.html" %} {% load static %} {% block title %}Django Djitney{% endblock %} {% block content %}
+<h2>Menu List</h2>
+<table id="menu">
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+      <th> </th>
+      <th> </th>
+  </tr>
+	<tr>
+  {% for item in menulist %}
+  </tr>
+  <tr>
+    <td>{{ item.menu_item_name }}</td>
+    <td>{{ item.item_price }}</td>
+
+    <td><a href="{% url 'menuupdate' item.id %}">Edit</a></td>
+    <td><a href="{% url 'menudelete' item.id %}">Delete</a></td>
+    
+  </tr>
+              {% endfor %}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
