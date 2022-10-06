@@ -33,3 +33,6 @@ class Purchase(models.Model):
         return '/purchase/list'
     def __str__(self):
         return self.purchased_item + " was purchased on " + str(self.timestamp)
+    def get_revenue(self):
+        for purchase in Purchase.purchased_item:
+           return sum(self.purchased_item.item_price)

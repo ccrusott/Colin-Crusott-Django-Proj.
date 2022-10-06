@@ -1,5 +1,30 @@
 {% extends "./base.html" %} {% load static %} {% block title %}Django Djitney{% endblock %} {% block content %}
-<h2>Menu List</h2>
+<h2>Sales:</h2>
+<table id="purchases">
+  <tr>
+    <th>Item</th>
+    <th>Timestamp</th>
+      <th> </th>
+      <th> </th>
+  </tr>
+	<tr>
+  {% for purchase in purchases %}
+  </tr>
+  <tr>
+    <td>{{ purchase.purchased_item }}</td>
+    <td>{{ purchase.timestamp }}</td>
+    
+    <td><a href="{% url 'purchaseupdate' purchase.id %}">Edit</a></td>
+    <td><a href="{% url 'purchasedelete' purchase.id %}">Delete</a></td>
+    
+  </tr>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+<h2>Current Menu:</h2>
 <table id="menu">
   <tr>
     <th>Name</th>
@@ -8,7 +33,7 @@
       <th> </th>
   </tr>
 	<tr>
-  {% for item in menulist %}
+  {% for item in menu %}
   </tr>
   <tr>
     <td>{{ item.menu_item_name }}</td>

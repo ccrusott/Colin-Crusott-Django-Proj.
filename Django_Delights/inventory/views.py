@@ -9,6 +9,14 @@ from django.http import Http404
 class HomeView(TemplateView):
     template_name = "inventory/home.html"
 
+    def get_context_data(self):
+        context = super().get_context_data()
+        context["menu"] = MenuItem.objects.all()
+        context["ingredient"] = Ingredient.objects.all()
+        context["recipe"] = RecipeRequirements.objects.all()
+        context["purchases"] = Purchase.objects.all()
+        return context
+
 class MenuItemList(ListView):
     model = MenuItem
     template = "inventory/menuitem_list.html"
