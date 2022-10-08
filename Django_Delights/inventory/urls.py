@@ -18,4 +18,5 @@ path('purchase/list', views.PurchaseList.as_view(), name='purchaselist'),
 path('purchase/create', views.PurchaseCreate.as_view(), name='purchasecreate'),
 path('purchase/update/<pk>', views.PurchaseUpdate.as_view(), name='purchaseupdate'),
 path('purchase/delete/<pk>', views.PurchaseDelete.as_view(), name='purchasedelete'),
+path('inventory/reports', views.ReportView.as_view(), name='reports')
 ]

@@ -1,0 +1,36 @@
+{% extends './base.html' %}
+{% load static %} 
+{% block head %}
+{% endblock %}
+{% block content %}
+<div class="container body-container">
+    <p>Welcome!</p>
+    <h2>Business overview</h2>
+    <table class="overview-tbl">
+        <tr>
+            <td>
+                Costs for this month:
+            </td>
+            <td>
+                ${{costs}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Income for this month:
+            </td>
+            <td>
+                ${{income}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Net profit for this month:
+            </td>
+            <td>
+                ${{profit}}
+            </td>
+        </tr>
+    </table>
+    </div>
+    {% endblock %}

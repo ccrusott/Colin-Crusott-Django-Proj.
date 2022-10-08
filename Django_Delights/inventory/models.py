@@ -3,10 +3,10 @@ from django.utils import timezone
 # Create your models here.
 class MenuItem(models.Model):
     menu_item_name = models.CharField(unique=True, max_length=30)
-    item_price = models.FloatField(max_length=5)
+    item_price = models.FloatField(default=0.00)
     def get_absolute_url(self):
         return '/menu/list'
-    
+
     def __str__(self):
         return self.menu_item_name + ":" + str(self.item_price)
 class Ingredient(models.Model):
@@ -26,6 +26,7 @@ class RecipeRequirements(models.Model):
         return '/recipe/list'
     def __str__(self):
         return "You need " + str(self.quantity_needed) + " of " + self.ingredients + " to make " + self.menu_item
+    
 class Purchase(models.Model):
     purchased_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(default=timezone.now, blank=True)
@@ -33,6 +34,4 @@ class Purchase(models.Model):
         return '/purchase/list'
     def __str__(self):
         return self.purchased_item + " was purchased on " + str(self.timestamp)
-    def get_revenue(self):
-        for purchase in Purchase.purchased_item:
-           return sum(self.purchased_item.item_price)
+   
