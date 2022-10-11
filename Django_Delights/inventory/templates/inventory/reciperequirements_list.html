@@ -6,7 +6,7 @@
   <tr>
     <th>Ingredient</th>
     <th>Menu Item</th>
-    <th>Quantity</th>
+    <th>Quantity Needed</th>
       <th> </th>
       <th> </th>
   </tr>
@@ -14,9 +14,9 @@
   {% for item in reciperequirements_list %}
   </tr>
   <tr>
-    <td>{{ item.ingredinet }}</td>
-    <td>{{ item.menu_item }}</td>
-    <td>{{ item.quantity }}</td>
+    <td>{{ item.ingredient }}</td>
+    <td>{{ item.menu_item_id }}</td>
+    <td>{{ item.quantity_needed }}</td>
 
     <td><a href="{% url 'recipeupdate' item.id %}">Edit</a></td>
     <td><a href="{% url 'recipedelete' item.id %}">Delete</a></td>

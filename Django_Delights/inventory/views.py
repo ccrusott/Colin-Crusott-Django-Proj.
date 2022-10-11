@@ -1,5 +1,6 @@
 from dataclasses import fields
-from django.shortcuts import render
+from unicodedata import name
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import MenuItemForm, IngredientForm, PurchaseForm, RecipeRequirementForm
 from .models import MenuItem, Ingredient, RecipeRequirements, Purchase
@@ -7,6 +8,7 @@ from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.http import Http404
 from django.db.models import Sum, F
+from django.contrib import messages
 # Create your views here.
 class HomeView(TemplateView):
     template_name = "inventory/home.html"
@@ -71,10 +73,27 @@ class RecipeDelete(DeleteView):
 class PurchaseList(ListView):
     model = Purchase
     template_name = "inventory/purchase_list.html"
-class PurchaseCreate(CreateView):
-    model = Purchase
-    form_class = PurchaseForm
+class PurchaseCreate(TemplateView):
     template_name = "inventory/purchase_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["menu_items"] = [X for X in MenuItem.objects.all() if X.available()]
+        return context
+    def post(self, request):
+        menu_item_id = request.POST["menu_item"]
+        menu_item = MenuItem.objects.get(pk=menu_item_id)
+        requirements = menu_item.reciperequirements_set
+        purchase = Purchase(purchased_item=menu_item)
+
+        for requirement in requirements.all():
+            required_ingredient = requirement.ingredient
+            required_ingredient.quantity -= requirement.quantity_needed
+            required_ingredient.save()
+        purchase.save()
+        return redirect("/purchase/list")
+
+
 class PurchaseUpdate(UpdateView):
     model = Purchase
     form_class = PurchaseForm
@@ -84,6 +103,7 @@ class PurchaseDelete(DeleteView):
     model = Purchase
     template_name = "inventory/purchase_confirm_delete.html"
     success_url = "/purchase/list"
+   
 class ReportView(TemplateView):
     template_name = "inventory/reports.html"
     
