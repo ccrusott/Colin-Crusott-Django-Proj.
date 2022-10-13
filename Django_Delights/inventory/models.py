@@ -1,11 +1,15 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 # Create your models here.
 class MenuItem(models.Model):
     menu_item_name = models.CharField(unique=True, max_length=30)
     item_price = models.FloatField(default=0.00)
     def get_absolute_url(self):
         return '/menu/list'
+
+    def get_recipe_url(self):
+        return reverse("recipedetail", kwargs={'pk': self.pk})
 
     def available(self):
         return all(X.enough() for X in self.reciperequirements_set.all())
@@ -22,7 +26,7 @@ class Ingredient(models.Model):
     def __str__(self):
         return self.name
 class RecipeRequirements(models.Model):
-    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, null = True)
     menu_item_id = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     quantity_needed = models.FloatField(default=0.0)
     def get_absolute_url(self):
@@ -30,7 +34,7 @@ class RecipeRequirements(models.Model):
     def enough(self):
         return self.quantity_needed <= self.ingredient.quantity
     def __str__(self):
-        return "You need " + str(self.quantity_needed) + " of " + self.ingredient + " to make " + self.menu_item_id
+        return str(self.ingredient) + " for " + str(self.menu_item_id)
 class Purchase(models.Model):
     purchased_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(default=timezone.now, blank=True)

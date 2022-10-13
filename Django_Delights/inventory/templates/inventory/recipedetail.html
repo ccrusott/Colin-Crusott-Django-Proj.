@@ -1,0 +1,38 @@
+{% extends "./base.html" %}
+ 
+{% load static %}
+
+{% block head %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+<link rel="stylesheet" href="{% static 'inventory/style.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="container body-container">
+    <h2>Recipe for </h2>
+
+    <table>
+        <tr class="table-heading">
+            <th>Ingredient</th>
+            <th>Quantity</th>
+            <th>Unit</th>
+            <th> </th>
+            <th> </th>
+        </tr>
+        {% for req in recipe_ingredient_query %}
+        <tr>
+            <td>{{ req.ingredient }}</td>
+            <td>{{ req.quantity_needed }}</td>
+            <td>{{ req.ingredient.unit }}</td>
+            <td><a href="{% url 'recipeupdate' req.id %}">Edit</a></td>
+            <td><a href="{% url 'recipedelete' req.id %}">Delete</a></td>
+        </tr>
+            
+        {% endfor %}
+    </table>
+<a href ="{% url 'recipecreate' %}" class="add-btn">Add Recipe Requirement</a>
+</div>
+{% endblock %}

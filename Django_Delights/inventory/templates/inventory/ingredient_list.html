@@ -1,29 +1,41 @@
 {% extends "./base.html" %}
 
-{% block content %}
-<h2>Ingredient List</h2>
-<table id="ingredient">
-  <tr>
-    <th>Name</th>
-    <th>Price</th>
-    <th>Quantity</th>
-    <th>Units</th>
-      <th> </th>
-      <th> </th>
-  </tr>
-	<tr>
-  {% for item in ingredient_list %}
-  </tr>
-  <tr>
-    <td>{{ item.name }}</td>
-    <td>{{ item.price_per_unit }}</td>
-    <td>{{ item.quantity }}</td>
-    <td>{{ item.unit }}</td>
+{% load static %}
 
-    <td><a href="{% url 'ingredientupdate' item.id %}">Edit</a></td>
-    <td><a href="{% url 'ingredientdelete' item.id %}">Delete</a></td>
-    
-  </tr>
-  {% endfor %}
-</table>
+{% block head %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+<link rel="stylesheet" href="{% static 'inventory/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container body-container">
+    <h2>Inventory</h2>
+    {% if object_list %}
+    <table id ="menu-table">
+        <tr class="table-heading">
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Unit</th>
+            <th>Price per Unit</th>
+            <th> </th>
+            <th> </th>
+        </tr>
+            {% for ingredient in ingredient_list %}
+            <tr>
+                <td>{{ ingredient.name }}</td>
+                <td>{{ ingredient.quantity }}</td>
+                <td>{{ ingredient.unit }}</td>
+                <td>${{ ingredient.price_per_unit }}</td>
+                <td><a href="{% url 'ingredientupdate' ingredient.id %}">Edit</a></td>
+                <td><a href="{% url 'ingredientdelete' ingredient.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+    </table>
+    {% else %}
+            <p>There are no items in the menu.</p>
+        {% endif %}
+    <a href="{% url 'ingredientcreate' %}"class = "add-btn">Add to Inventory</a>
+</div>
 {% endblock %}

@@ -1,25 +1,40 @@
 {% extends "./base.html" %}
 
-{% block content %}
-<h2>Purchase List</h2>
-<table id="purchase">
-  <tr>
-    <th>Purchased Item</th>
-    <th>Timestamp</th>
-      <th> </th>
-      <th> </th>
-  </tr>
-	<tr>
-  {% for item in purchase_list %}
-  </tr>
-  <tr>
-    <td>{{ item.purchased_item }}</td>
-    <td>{{ item.timestamp }}</td>
+{% load static %}
 
-    <td><a href="{% url 'purchaseupdate' item.id %}">Edit</a></td>
-    <td><a href="{% url 'purchasedelete' item.id %}">Delete</a></td>
-    
-  </tr>
-  {% endfor %}
-</table>
+{% block head %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+<link rel="stylesheet" href="{% static 'inventory/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container body-container">
+    <h2>Purchase Log</h2>
+    {% if object_list %}
+        <table>
+            <tr class="table-heading">
+                <th>Date</th>
+                <th>Time</th>
+                <th>Item</th>
+                <th></th>
+                <th></th>
+            </tr>
+
+        {% for purchase in object_list %}
+        <tr>
+            <td>{{ purchase.timestamp|date:"D d M Y"}}</td>
+            <td>{{ purchase.timestamp|time:"H:i" }}</td>
+            <td>{{ purchase.purchased_item }}</td>
+            <td><a href="{% url 'purchaseupdate' purchase.id %}">Edit</a></td>
+            <td><a href="{% url 'purchasedelete' purchase.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>  
+    {% else %}
+            <p>No purchases have been logged.</p>
+        {% endif %}
+<a href="{% url 'purchasecreate' %}" class ="add-btn">Add Purchase</a>
+</div>
 {% endblock %}
