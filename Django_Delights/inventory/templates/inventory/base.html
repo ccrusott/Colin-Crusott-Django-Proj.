@@ -14,7 +14,10 @@
                 <li><a href="{% url 'recipelist' %}">Recipe</a></li>
                 <li><a href="{% url 'ingredientlist' %}">Inventory</a></li>
                 <li><a href="{% url 'purchaselist' %}">Purchase Log</a></li>
-                
+                <li><a href="{% url 'reports' %}">Financial Reports</a></li>
+                {% if user.username %} 
+                <a class="logout-button" href="{% url 'logout' %}"> Log Out</a>
+                {% endif %}
             </ul>
     </nav>
     </div>

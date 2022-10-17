@@ -10,33 +10,24 @@
 
 {% block content %}
 <div class="container body-container">
-<p>Welcome, !</p>
-<h2>Business overview</h2>
-<table class="overview-tbl">
-    <tr>
-        <td>
-            Costs for this month:
-        </td>
-        <td>
-            ${{costs}}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Income for this month:
-        </td>
-        <td>
-            ${{income}}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Net profit for this month:
-        </td>
-        <td>
-            ${{profit}}
-        </td>
-    </tr>
-</table>
+    <h2>Welcome, {{ user.username }}! Current Menu Offerings:</h2>
+    {% if menu %}
+    <table id ="menu-table">
+        <tr class="table-heading">
+            <th>Name</th>
+            <th>Price</th>
+            <th> </th>
+            <th> </th>
+        </tr>
+            {% for item in menu %}
+            <tr>
+                <td>{{ item.menu_item_name }}</td>
+                <td>${{ item.item_price }}</td>
+            </tr>
+            {% endfor %}
+    </table>
+    {% else %}
+            <p>There are no items in the menu.</p>
+        {% endif %}
 </div>
 {% endblock %}

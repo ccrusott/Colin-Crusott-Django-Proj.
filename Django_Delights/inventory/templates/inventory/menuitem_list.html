@@ -21,7 +21,7 @@
         </tr>
             {% for item in menuitem_list %}
             <tr>
-                <td><a href="{{ item.get_absolute_url }}">{{ item.menu_item_name }}</a></td>
+                <td><a href="{% url 'recipedetail' item.id %}">{{ item.menu_item_name }}</a></td>
                 <td>${{ item.item_price }}</td>
                 <td><a href="{% url 'menuupdate' item.id %}">Edit</a></td>
                 <td><a href="{% url 'menudelete' item.id %}">Delete</a></td>

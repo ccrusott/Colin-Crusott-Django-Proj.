@@ -12,8 +12,8 @@
 
 {% block content %}
 <div class="container body-container">
-    <h2>Recipe for </h2>
-
+    <h2>Recipe for {{ object.menu_item_name }} </h2>
+    {% if recipe_req_list %}
     <table>
         <tr class="table-heading">
             <th>Ingredient</th>
@@ -33,6 +33,9 @@
             
         {% endfor %}
     </table>
-<a href ="{% url 'recipecreate' %}" class="add-btn">Add Recipe Requirement</a>
+    {% else %} 
+        <p> No recipe available for this menu item.</p>
+    {% endif %}
+<a href ="{% url 'recipeupdate' object.id %}" class="add-btn">Add Recipe Requirement</a>
 </div>
 {% endblock %}
