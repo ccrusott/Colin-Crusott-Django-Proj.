@@ -15,11 +15,11 @@
     {% if reciperequirements_list %}
     <ol class="recipe-list">
         {% for recipe in reciperequirements_list %}
-            <li><a href="{% url 'recipedetail' recipe.id %}">{{ recipe.menu_item_id }}</a></li>
+            <li><a href="{% url 'recipedetail' recipe.id %}">{{ recipe.menu_item_name }}</a></li>
         {% endfor %}
     </ol>
     {% else %}
             <p>There are no items in the menu.</p>
-        {% endif %}
+    {% endif %}
 </div>
 {% endblock %}

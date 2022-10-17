@@ -77,15 +77,14 @@ class RecipeUpdate(LoginRequiredMixin, UpdateView):
     model = RecipeRequirements
     form_class = RecipeRequirementForm
     template_name = "inventory/reciperequirements_update.html"
-    success_url= "/recipe/list"
+    success_url= "/menu/list"
 class RecipeDetail(LoginRequiredMixin, DetailView):
     model = MenuItem
     template_name = "inventory/recipedetail.html"
     context_object_name = 'recipe_item'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['recipe_req_list'] = RecipeRequirements.objects.filter(menu_item_id=self.object)
-        context['recipe_ingredient_query'] = RecipeRequirements.objects.select_related('ingredient')
+        context['ingredients'] = RecipeRequirements.objects.filter(menu_item_id=self.object)
         return context
 class RecipeDelete(LoginRequiredMixin, DeleteView):
     model = RecipeRequirements

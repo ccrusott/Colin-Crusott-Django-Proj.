@@ -30,7 +30,7 @@ class RecipeRequirements(models.Model):
     menu_item_id = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     quantity_needed = models.FloatField(default=0.0)
     def get_absolute_url(self):
-        return '/recipe/list'
+        return '/menu/list'
     def enough(self):
         return self.quantity_needed <= self.ingredient.quantity
     def __str__(self):

@@ -13,7 +13,6 @@
 {% block content %}
 <div class="container body-container">
     <h2>Recipe for {{ object.menu_item_name }} </h2>
-    {% if recipe_req_list %}
     <table>
         <tr class="table-heading">
             <th>Ingredient</th>
@@ -22,20 +21,17 @@
             <th> </th>
             <th> </th>
         </tr>
-        {% for req in recipe_ingredient_query %}
+        {% for ingredient in ingredients %}
         <tr>
-            <td>{{ req.ingredient }}</td>
-            <td>{{ req.quantity_needed }}</td>
-            <td>{{ req.ingredient.unit }}</td>
-            <td><a href="{% url 'recipeupdate' req.id %}">Edit</a></td>
-            <td><a href="{% url 'recipedelete' req.id %}">Delete</a></td>
+            <td>{{ ingredient.ingredient }}</td>
+            <td>{{ ingredient.quantity_needed }}</td>
+            <td>{{ ingredient.ingredient.unit }}</td>
+            <td><a href="{% url 'recipeupdate' ingredient.id %}">Edit</a></td>
+            <td><a href="{% url 'recipedelete' ingredient.id %}">Delete</a></td>
         </tr>
             
         {% endfor %}
     </table>
-    {% else %} 
-        <p> No recipe available for this menu item.</p>
-    {% endif %}
-<a href ="{% url 'recipeupdate' object.id %}" class="add-btn">Add Recipe Requirement</a>
+<a href ="{% url 'recipecreate' %}" class="add-btn">Add Recipe Requirement</a>
 </div>
 {% endblock %}
