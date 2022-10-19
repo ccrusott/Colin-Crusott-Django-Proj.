@@ -6,7 +6,7 @@ body{
     margin:0;
     padding:0;
     position:relative;
-    background-color:#fffbf0;
+    background-color:#F5F5F5;
     max-width: 100vw;
     color:#282612;
     font-family: 'Work Sans', sans-serif;
@@ -14,14 +14,14 @@ body{
 }
 body a{
     text-decoration:none;
-    color: #943d24
+    color: #277BC0;
 }
 body a:hover{
     color:tomato;
     transition:1s;
 }
 body a:visited{
-    color:#943d24;
+    color:#277BC0;
 }
 
 body a:active{
@@ -32,7 +32,7 @@ header{
     margin:0;
 }
 .header-container {
-    background-color: #943d24;
+    background-color: #062C30;
     width:100%;
     padding:0;
     margin:0;
@@ -46,7 +46,7 @@ h1 {
     font-family: 'Montserrat', sans-serif;
     font-weight:700;
     font-size:1.5em;
-    color:#fffbf0;
+    color:#F5F5F5;
     margin:0;
     padding:0;
     grid-column-start:1;
@@ -79,7 +79,7 @@ table td, th{
     border:none;
 }
 .body-container table:not(.overview-tbl) tr:first-child{
-    background-color:#282612;
+    background-color:#05595B;
     color:#fffbf0;
 }
 .body-container h2{
@@ -150,7 +150,7 @@ nav ul li{
 }
 .add-btn, input[type=submit]{
     margin-top:2.5%;
-    background-color:#943d24;
+    background-color:#15b0b3;
     color:#fffbf0;
     padding:1% 5%;
     transition:1s;
@@ -164,13 +164,13 @@ nav ul li{
 }
 
 .add-btn:visited{
-    background-color:#943d24;
+    background-color:#15b0b3;
     color:#fffbf0;
     transition:1s;
 }
 
 .add-btn:active{
-    background-color:#fa7551;    
+    background-color:#15b0b3;    
     color:#fffbf0;
     transition:1s;
 }
