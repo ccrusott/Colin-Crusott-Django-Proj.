@@ -1,0 +1,23 @@
+<head>
+    {% block head %}
+    {% endblock %}
+  </head>
+  
+  <body>
+      <header>
+          <div>
+              <h1>RP City Builder</h1>
+          <nav>
+              <ul>
+                  <li><a href="{% url 'home' %}">Home</a></li>
+                  <li><a href="{% url 'dwarfsize' %}">Dwarven Cities</a></li>
+              </ul>
+      </nav>
+      </div>
+      </header>
+      
+      
+    {% block content %}
+    {% endblock %}
+  </body>
+  

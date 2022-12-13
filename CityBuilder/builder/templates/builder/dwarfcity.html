@@ -1,0 +1,147 @@
+{% extends "./base.html" %} 
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+
+<h1> Welcome to {{ dwarfpre }} {{ dwarfsuf }}!</h1>
+<h4>Population: {{population}}</h4>
+<h4>Ruled By: {{local_first|random}} {{local_last|random}} - {{official_traits|random}}, {{common_traits|random}}</h4>
+<h3>Town Guard</h3>
+<h5>Guard Size: {{guard_size}}</h5>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Traits</th>
+    <th>Race</th>
+  </tr>
+  {% for name in guard_first %}
+  <tr>
+    <td>{{guard_first|random}} {{guard_last|random}}</td>
+    <td>{{guard_traits|random}}</td>
+    <td>{{name.race}}</td>
+  </tr>
+  {% endfor %}
+</table>
+<h3>Local Residents</h3>
+<table>
+    <tr>
+      <th>Name</th>
+      <th>Traits</th>
+      <th>Race</th>
+    </tr>
+    {% for name in local_first %}
+    <tr>
+      <td>{{local_first|random}} {{local_last|random}}</td>
+      <td>{{common_traits|random}}</td>
+      <td>{{name.race}}</td>
+    </tr>
+    {%endfor%}
+</table>
+<h3>Foreign Residents and Visitors
+    <table>
+        <tr>
+          <th>Name</th>
+          <th>Traits</th>
+          <th>Race</th>
+        </tr>
+        {% for first, last in foreign_names1 %}
+        <tr>
+          <td>{{first.first_name}} {{last.last_name}} </td>
+          <td>{{common_traits|random}}</td>
+          <td>{{first.race}}</td>
+        </tr>
+        {% endfor %}
+        {% for first, last in foreign_names2 %}
+        <tr>
+          <td>{{first.first_name}} {{last.last_name}} </td>
+          <td>{{common_traits|random}}</td>
+          <td>{{first.race}}</td>
+        </tr>
+        {% endfor %}
+        {% for first, last in foreign_names3 %}
+        <tr>
+          <td>{{first.first_name}} {{last.last_name}} </td>
+          <td>{{common_traits|random}}</td>
+          <td>{{first.race}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+<div>
+    <h2>{{ tavernpre }} {{ tavernsuf }} - Tavern</h2>
+    <h3>{{ tav_first }} {{ tav_last }} - Shop Keeper - {{ business_traits|random }}</h3>
+    <table>
+        <tr class="table-heading">
+            <th>Item</th>
+            <th>Price</th>
+            <th> </th>
+            <th> </th>
+        </tr>
+        {% for item in inventory1 %}
+        <tr>
+            <td>{{ item.product }}</td>
+            <td>{{ item.price }}</td>
+        </tr>
+            
+        {% endfor %}
+    </table>
+</div>
+<div>
+    <h2>{{ innpre }} {{ innsuf }} - Inn</h2>
+    <h3>{{ inn_first }} {{ inn_last }} - Inn Keeper - {{ business_traits|random }}</h3>
+    <table>
+        <tr class>
+            <th>Item</th>
+            <th>Price</th>
+            <th> </th>
+            <th> </th>
+        </tr>
+        {% for item in inventory2 %}
+        <tr>
+            <td>{{ item.product }}</td>
+            <td>{{ item.price }}</td>
+        </tr>
+            
+        {% endfor %}
+    </table>
+</div>
+<div>
+  <h2>{{ bs_pre }} {{ bs_suf }} - Blacksmith</h2>
+  <h3>{{ bs_first }} {{ bs_last }} - Shop Keeper - {{ business_traits|random }}</h3>
+  <table>
+      <tr>
+          <th>Item</th>
+          <th>Price</th>
+          <th> </th>
+          <th> </th>
+      </tr>
+      {% for item in inventory3 %}
+      <tr>
+          <td>{{ item.product }}</td>
+          <td>{{ item.price }}</td>
+      </tr>
+          
+      {% endfor %}
+  </table>
+</div>
+<div>
+  <h2>{{ randpre1 }} {{ randsuf1 }} - {{randpre1.type}}</h2>
+  <h3>{{ rand1_first }} {{ rand1_last }} - Shop Keeper - {{ business_traits|random }}</h3>
+  <table>
+      <tr>
+          <th>Item</th>
+          <th>Price</th>
+          <th> </th>
+          <th> </th>
+      </tr>
+      {% for item in randinventory1 %}
+      <tr>
+          <td>{{ item.product }}</td>
+          <td>{{ item.price }}</td>
+      </tr>
+          
+      {% endfor %}
+  </table>
+</div>
+{% endblock %}
